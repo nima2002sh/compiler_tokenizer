@@ -75,3 +75,16 @@ t.build()
 data = open('input.txt', 'r')
 t.test(data.read())
 
+
+class Table:
+    
+    parametersList = []
+        
+    def __init__(self, name, type, isFunction, parametersNum, isAssignd = False, isDefined = True):
+        self.name = name
+        self.type = type
+        self.isFunction = isFunction
+        self.parametersNum = parametersNum
+        self.isAssignd = isAssignd
+        self.isDefined = isDefined
+        
