@@ -1,2 +1,0 @@
-var ali = "asdlkjfksld"
-ali = ali + 1;

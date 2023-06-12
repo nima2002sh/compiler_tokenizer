@@ -74,3 +74,4 @@ t = tokenizer()
 t.build()
 data = open('input.txt', 'r')
 t.test(data.read())
+
