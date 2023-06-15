@@ -79,12 +79,36 @@ t.test(data.read())
 class Table:
     
     parametersList = []
-        
-    def __init__(self, name, type, isFunction, parametersNum, isAssignd = False, isDefined = True):
+    
+    def __init__(self, name, returnType, parametrType, isFunction, parametersNum, isAssignd = False, isDefined = True):
         self.name = name
-        self.type = type
+        self.returnType = returnType
+        self.parametrType = parametrType
         self.isFunction = isFunction
         self.parametersNum = parametersNum
         self.isAssignd = isAssignd
         self.isDefined = isDefined
-        
+
+functionName = ['scan', 'print', 'list', 'length', 'exit']
+info = {}
+allIden = []
+definedIden = []
+allReturnType = []
+function = ''
+returnType = ''
+
+tScan = Table('scan', 'NUMBER', 'NULL', True, 0)
+info['scan'] = tScan
+
+tPrint =  Table('print', 'NUMBER', 'NULL', True, 0)
+info['print'] = tPrint
+
+tList = Table('list', 'list', 'NUMBER', True, 1)
+info['list'] = tList
+
+tLength = Table('length', 'NUMBER', 'list', True, 1)
+info['length'] = tLength
+
+tExit = Table('exit', 'NULL', 'NUMBER', True, 1)
+info['exit'] = tExit
+
