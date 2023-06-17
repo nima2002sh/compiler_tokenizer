@@ -77,13 +77,11 @@ t.test(data.read())
 
 
 class Table:
-    
-    parametersList = []
-    
-    def __init__(self, name, returnType, parametrType, isFunction, parametersNum, isAssignd = False, isDefined = True):
+        
+    def __init__(self, name, returnType, parametrs, isFunction, parametersNum, isAssignd = False, isDefined = True):
         self.name = name
         self.returnType = returnType
-        self.parametrType = parametrType
+        self.parametrs = parametrs
         self.isFunction = isFunction
         self.parametersNum = parametersNum
         self.isAssignd = isAssignd
@@ -97,18 +95,45 @@ allReturnType = []
 function = ''
 returnType = ''
 
-tScan = Table('scan', 'NUMBER', 'NULL', True, 0)
+tScan = Table('scan', 'NUMBER', [], True, 0)
 info['scan'] = tScan
 
-tPrint =  Table('print', 'NUMBER', 'NULL', True, 0)
+tPrint =  Table('print', 'NUMBER', [], True, 0)
 info['print'] = tPrint
 
-tList = Table('list', 'list', 'NUMBER', True, 1)
+tList = Table('list', 'list', ['NUMBER'], True, 1)
 info['list'] = tList
 
-tLength = Table('length', 'NUMBER', 'list', True, 1)
+tLength = Table('length', 'NUMBER', ['list'], True, 1)
 info['length'] = tLength
 
-tExit = Table('exit', 'NULL', 'NUMBER', True, 1)
+tExit = Table('exit', 'NULL', ['NUMBER'], True, 1)
 info['exit'] = tExit
+
+def checkDefined(t, line):
+    if t in allIden:
+        if not t in definedIden:
+            print('Error in line', line, ':\n  ', t, 'is not defined!')
+            return True
+    return False
+
+def checkFunction(t):
+    if t in funcNames:
+        print('Function', t, 'already exist!')
+    else:
+        funcNames.append(t)
+        
+def checkReturnType(t):
+    if isinstance(t, int):
+        return 'NUMBER'
+    if t in definedIden:
+        return info[t].returnType
+
+precedence = (
+    ('left', '!', 'and', 'or', 'LEQ', 'HEQ', 'NOTEQ', 'EQUALS', '<', '>'),
+    ('left', '=', ':'),
+    ('left', '+', '-'),
+    ('left', '*', '/'),
+    ('left', '(', ')', '[', ']', '{', '}')
+)
 
