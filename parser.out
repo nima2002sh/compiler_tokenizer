@@ -1,0 +1,4235 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    EXIT
+    ID
+    LENGTH
+    LIST
+    PRINT
+    SCAN
+    STRING
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> <empty>
+Rule 2     prog -> func prog
+Rule 3     func -> DEF type iden ( flist ) { body }
+Rule 4     func -> DEF type iden ( flist ) RETURN expr ;
+Rule 5     body -> <empty>
+Rule 6     body -> stmt body
+Rule 7     stmt -> expr ;
+Rule 8     stmt -> defvar ;
+Rule 9     stmt -> IF ( expr ) stmt
+Rule 10    stmt -> IF ( expr ) stmt ELSE stmt
+Rule 11    stmt -> WHILE ( expr ) stmt
+Rule 12    stmt -> FOR ( iden = expr TO expr ) stmt
+Rule 13    stmt -> RETURN expr ;
+Rule 14    stmt -> { body }
+Rule 15    stmt -> func
+Rule 16    defvar -> VAR type iden
+Rule 17    defvar -> VAR type iden = expr
+Rule 18    flist -> <empty>
+Rule 19    flist -> type iden
+Rule 20    flist -> type iden , flist
+Rule 21    clist -> <empty>
+Rule 22    clist -> expr
+Rule 23    clist -> expr , clist
+Rule 24    expr -> expr [ expr ]
+Rule 25    expr -> [ clist ]
+Rule 26    expr -> expr ? expr : expr
+Rule 27    expr -> expr + expr
+Rule 28    expr -> expr - expr
+Rule 29    expr -> expr * expr
+Rule 30    expr -> expr / expr
+Rule 31    expr -> expr % expr
+Rule 32    expr -> expr > expr
+Rule 33    expr -> expr < expr
+Rule 34    expr -> expr EQUALS expr
+Rule 35    expr -> expr HEQ expr
+Rule 36    expr -> expr LEQ expr
+Rule 37    expr -> expr NOTEQ expr
+Rule 38    expr -> expr OR expr
+Rule 39    expr -> expr AND expr
+Rule 40    expr -> ! expr
+Rule 41    expr -> + expr
+Rule 42    expr -> - expr
+Rule 43    expr -> iden
+Rule 44    expr -> iden = expr
+Rule 45    expr -> iden ( clist )
+Rule 46    expr -> num
+Rule 47    expr -> str
+Rule 48    iden -> IDEN
+Rule 49    num -> NUMBER
+Rule 50    str -> STR
+Rule 51    type -> INT
+Rule 52    type -> NULL
+Rule 53    type -> VECTOR
+
+Terminals, with rules where they appear
+
+!                    : 40
+%                    : 31
+(                    : 3 4 9 10 11 12 45
+)                    : 3 4 9 10 11 12 45
+*                    : 29
++                    : 27 41
+,                    : 20 23
+-                    : 28 42
+/                    : 30
+:                    : 26
+;                    : 4 7 8 13
+<                    : 33
+=                    : 12 17 44
+>                    : 32
+?                    : 26
+AND                  : 39
+COMMENT              : 
+DEF                  : 3 4
+ELSE                 : 10
+EQUALS               : 34
+EXIT                 : 
+FOR                  : 12
+HEQ                  : 35
+ID                   : 
+IDEN                 : 48
+IF                   : 9 10
+INT                  : 51
+LENGTH               : 
+LEQ                  : 36
+LIST                 : 
+NOTEQ                : 37
+NULL                 : 52
+NUMBER               : 49
+OR                   : 38
+PRINT                : 
+RETURN               : 4 13
+SCAN                 : 
+STR                  : 50
+STRING               : 
+TO                   : 12
+VAR                  : 16 17
+VECTOR               : 53
+WHILE                : 11
+[                    : 24 25
+]                    : 24 25
+error                : 
+{                    : 3 14
+}                    : 3 14
+
+Nonterminals, with rules where they appear
+
+body                 : 3 6 14
+clist                : 23 25 45
+defvar               : 8
+expr                 : 4 7 9 10 11 12 12 13 17 22 23 24 24 26 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 40 41 42 44
+flist                : 3 4 20
+func                 : 2 15
+iden                 : 3 4 12 16 17 19 20 43 44 45
+num                  : 46
+prog                 : 2 0
+stmt                 : 6 9 10 10 11 12
+str                  : 47
+type                 : 3 4 16 17 19 20
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> .
+    (2) prog -> . func prog
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+
+    $end            reduce using rule 1 (prog -> .)
+    DEF             shift and go to state 3
+
+    prog                           shift and go to state 1
+    func                           shift and go to state 2
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (2) prog -> func . prog
+    (1) prog -> .
+    (2) prog -> . func prog
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+
+    $end            reduce using rule 1 (prog -> .)
+    DEF             shift and go to state 3
+
+    func                           shift and go to state 2
+    prog                           shift and go to state 4
+
+state 3
+
+    (3) func -> DEF . type iden ( flist ) { body }
+    (4) func -> DEF . type iden ( flist ) RETURN expr ;
+    (51) type -> . INT
+    (52) type -> . NULL
+    (53) type -> . VECTOR
+
+    INT             shift and go to state 6
+    NULL            shift and go to state 7
+    VECTOR          shift and go to state 8
+
+    type                           shift and go to state 5
+
+state 4
+
+    (2) prog -> func prog .
+
+    $end            reduce using rule 2 (prog -> func prog .)
+
+
+state 5
+
+    (3) func -> DEF type . iden ( flist ) { body }
+    (4) func -> DEF type . iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+
+    IDEN            shift and go to state 10
+
+    iden                           shift and go to state 9
+
+state 6
+
+    (51) type -> INT .
+
+    IDEN            reduce using rule 51 (type -> INT .)
+
+
+state 7
+
+    (52) type -> NULL .
+
+    IDEN            reduce using rule 52 (type -> NULL .)
+
+
+state 8
+
+    (53) type -> VECTOR .
+
+    IDEN            reduce using rule 53 (type -> VECTOR .)
+
+
+state 9
+
+    (3) func -> DEF type iden . ( flist ) { body }
+    (4) func -> DEF type iden . ( flist ) RETURN expr ;
+
+    (               shift and go to state 11
+
+
+state 10
+
+    (48) iden -> IDEN .
+
+    (               reduce using rule 48 (iden -> IDEN .)
+    ,               reduce using rule 48 (iden -> IDEN .)
+    )               reduce using rule 48 (iden -> IDEN .)
+    =               reduce using rule 48 (iden -> IDEN .)
+    ;               reduce using rule 48 (iden -> IDEN .)
+    [               reduce using rule 48 (iden -> IDEN .)
+    ?               reduce using rule 48 (iden -> IDEN .)
+    +               reduce using rule 48 (iden -> IDEN .)
+    -               reduce using rule 48 (iden -> IDEN .)
+    *               reduce using rule 48 (iden -> IDEN .)
+    /               reduce using rule 48 (iden -> IDEN .)
+    %               reduce using rule 48 (iden -> IDEN .)
+    >               reduce using rule 48 (iden -> IDEN .)
+    <               reduce using rule 48 (iden -> IDEN .)
+    EQUALS          reduce using rule 48 (iden -> IDEN .)
+    HEQ             reduce using rule 48 (iden -> IDEN .)
+    LEQ             reduce using rule 48 (iden -> IDEN .)
+    NOTEQ           reduce using rule 48 (iden -> IDEN .)
+    OR              reduce using rule 48 (iden -> IDEN .)
+    AND             reduce using rule 48 (iden -> IDEN .)
+    ]               reduce using rule 48 (iden -> IDEN .)
+    :               reduce using rule 48 (iden -> IDEN .)
+    TO              reduce using rule 48 (iden -> IDEN .)
+
+
+state 11
+
+    (3) func -> DEF type iden ( . flist ) { body }
+    (4) func -> DEF type iden ( . flist ) RETURN expr ;
+    (18) flist -> .
+    (19) flist -> . type iden
+    (20) flist -> . type iden , flist
+    (51) type -> . INT
+    (52) type -> . NULL
+    (53) type -> . VECTOR
+
+    )               reduce using rule 18 (flist -> .)
+    INT             shift and go to state 6
+    NULL            shift and go to state 7
+    VECTOR          shift and go to state 8
+
+    type                           shift and go to state 12
+    flist                          shift and go to state 13
+
+state 12
+
+    (19) flist -> type . iden
+    (20) flist -> type . iden , flist
+    (48) iden -> . IDEN
+
+    IDEN            shift and go to state 10
+
+    iden                           shift and go to state 14
+
+state 13
+
+    (3) func -> DEF type iden ( flist . ) { body }
+    (4) func -> DEF type iden ( flist . ) RETURN expr ;
+
+    )               shift and go to state 15
+
+
+state 14
+
+    (19) flist -> type iden .
+    (20) flist -> type iden . , flist
+
+    )               reduce using rule 19 (flist -> type iden .)
+    ,               shift and go to state 16
+
+
+state 15
+
+    (3) func -> DEF type iden ( flist ) . { body }
+    (4) func -> DEF type iden ( flist ) . RETURN expr ;
+
+    {               shift and go to state 17
+    RETURN          shift and go to state 18
+
+
+state 16
+
+    (20) flist -> type iden , . flist
+    (18) flist -> .
+    (19) flist -> . type iden
+    (20) flist -> . type iden , flist
+    (51) type -> . INT
+    (52) type -> . NULL
+    (53) type -> . VECTOR
+
+    )               reduce using rule 18 (flist -> .)
+    INT             shift and go to state 6
+    NULL            shift and go to state 7
+    VECTOR          shift and go to state 8
+
+    type                           shift and go to state 12
+    flist                          shift and go to state 19
+
+state 17
+
+    (3) func -> DEF type iden ( flist ) { . body }
+    (5) body -> .
+    (6) body -> . stmt body
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    }               reduce using rule 5 (body -> .)
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    body                           shift and go to state 22
+    stmt                           shift and go to state 23
+    expr                           shift and go to state 24
+    defvar                         shift and go to state 25
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 18
+
+    (4) func -> DEF type iden ( flist ) RETURN . expr ;
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    expr                           shift and go to state 40
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 19
+
+    (20) flist -> type iden , flist .
+
+    )               reduce using rule 20 (flist -> type iden , flist .)
+
+
+state 20
+
+    (43) expr -> iden .
+    (44) expr -> iden . = expr
+    (45) expr -> iden . ( clist )
+
+    ;               reduce using rule 43 (expr -> iden .)
+    [               reduce using rule 43 (expr -> iden .)
+    ?               reduce using rule 43 (expr -> iden .)
+    +               reduce using rule 43 (expr -> iden .)
+    -               reduce using rule 43 (expr -> iden .)
+    *               reduce using rule 43 (expr -> iden .)
+    /               reduce using rule 43 (expr -> iden .)
+    %               reduce using rule 43 (expr -> iden .)
+    >               reduce using rule 43 (expr -> iden .)
+    <               reduce using rule 43 (expr -> iden .)
+    EQUALS          reduce using rule 43 (expr -> iden .)
+    HEQ             reduce using rule 43 (expr -> iden .)
+    LEQ             reduce using rule 43 (expr -> iden .)
+    NOTEQ           reduce using rule 43 (expr -> iden .)
+    OR              reduce using rule 43 (expr -> iden .)
+    AND             reduce using rule 43 (expr -> iden .)
+    ,               reduce using rule 43 (expr -> iden .)
+    ]               reduce using rule 43 (expr -> iden .)
+    )               reduce using rule 43 (expr -> iden .)
+    :               reduce using rule 43 (expr -> iden .)
+    TO              reduce using rule 43 (expr -> iden .)
+    =               shift and go to state 41
+    (               shift and go to state 42
+
+
+state 21
+
+    (14) stmt -> { . body }
+    (5) body -> .
+    (6) body -> . stmt body
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    }               reduce using rule 5 (body -> .)
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    body                           shift and go to state 43
+    stmt                           shift and go to state 23
+    expr                           shift and go to state 24
+    defvar                         shift and go to state 25
+    iden                           shift and go to state 20
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 22
+
+    (3) func -> DEF type iden ( flist ) { body . }
+
+    }               shift and go to state 44
+
+
+state 23
+
+    (6) body -> stmt . body
+    (5) body -> .
+    (6) body -> . stmt body
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    }               reduce using rule 5 (body -> .)
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    stmt                           shift and go to state 23
+    body                           shift and go to state 45
+    expr                           shift and go to state 24
+    defvar                         shift and go to state 25
+    iden                           shift and go to state 20
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 24
+
+    (7) stmt -> expr . ;
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               shift and go to state 46
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 25
+
+    (8) stmt -> defvar . ;
+
+    ;               shift and go to state 62
+
+
+state 26
+
+    (9) stmt -> IF . ( expr ) stmt
+    (10) stmt -> IF . ( expr ) stmt ELSE stmt
+
+    (               shift and go to state 63
+
+
+state 27
+
+    (11) stmt -> WHILE . ( expr ) stmt
+
+    (               shift and go to state 64
+
+
+state 28
+
+    (12) stmt -> FOR . ( iden = expr TO expr ) stmt
+
+    (               shift and go to state 65
+
+
+state 29
+
+    (13) stmt -> RETURN . expr ;
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 66
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 30
+
+    (15) stmt -> func .
+
+    IF              reduce using rule 15 (stmt -> func .)
+    WHILE           reduce using rule 15 (stmt -> func .)
+    FOR             reduce using rule 15 (stmt -> func .)
+    RETURN          reduce using rule 15 (stmt -> func .)
+    {               reduce using rule 15 (stmt -> func .)
+    [               reduce using rule 15 (stmt -> func .)
+    !               reduce using rule 15 (stmt -> func .)
+    +               reduce using rule 15 (stmt -> func .)
+    -               reduce using rule 15 (stmt -> func .)
+    VAR             reduce using rule 15 (stmt -> func .)
+    DEF             reduce using rule 15 (stmt -> func .)
+    IDEN            reduce using rule 15 (stmt -> func .)
+    NUMBER          reduce using rule 15 (stmt -> func .)
+    STR             reduce using rule 15 (stmt -> func .)
+    }               reduce using rule 15 (stmt -> func .)
+    ELSE            reduce using rule 15 (stmt -> func .)
+
+
+state 31
+
+    (25) expr -> [ . clist ]
+    (21) clist -> .
+    (22) clist -> . expr
+    (23) clist -> . expr , clist
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    ]               reduce using rule 21 (clist -> .)
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    clist                          shift and go to state 67
+    expr                           shift and go to state 68
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 32
+
+    (41) expr -> + . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 69
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 33
+
+    (42) expr -> - . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 70
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 34
+
+    (40) expr -> ! . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 71
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 35
+
+    (46) expr -> num .
+
+    ;               reduce using rule 46 (expr -> num .)
+    [               reduce using rule 46 (expr -> num .)
+    ?               reduce using rule 46 (expr -> num .)
+    +               reduce using rule 46 (expr -> num .)
+    -               reduce using rule 46 (expr -> num .)
+    *               reduce using rule 46 (expr -> num .)
+    /               reduce using rule 46 (expr -> num .)
+    %               reduce using rule 46 (expr -> num .)
+    >               reduce using rule 46 (expr -> num .)
+    <               reduce using rule 46 (expr -> num .)
+    EQUALS          reduce using rule 46 (expr -> num .)
+    HEQ             reduce using rule 46 (expr -> num .)
+    LEQ             reduce using rule 46 (expr -> num .)
+    NOTEQ           reduce using rule 46 (expr -> num .)
+    OR              reduce using rule 46 (expr -> num .)
+    AND             reduce using rule 46 (expr -> num .)
+    ,               reduce using rule 46 (expr -> num .)
+    ]               reduce using rule 46 (expr -> num .)
+    )               reduce using rule 46 (expr -> num .)
+    :               reduce using rule 46 (expr -> num .)
+    TO              reduce using rule 46 (expr -> num .)
+
+
+state 36
+
+    (47) expr -> str .
+
+    ;               reduce using rule 47 (expr -> str .)
+    [               reduce using rule 47 (expr -> str .)
+    ?               reduce using rule 47 (expr -> str .)
+    +               reduce using rule 47 (expr -> str .)
+    -               reduce using rule 47 (expr -> str .)
+    *               reduce using rule 47 (expr -> str .)
+    /               reduce using rule 47 (expr -> str .)
+    %               reduce using rule 47 (expr -> str .)
+    >               reduce using rule 47 (expr -> str .)
+    <               reduce using rule 47 (expr -> str .)
+    EQUALS          reduce using rule 47 (expr -> str .)
+    HEQ             reduce using rule 47 (expr -> str .)
+    LEQ             reduce using rule 47 (expr -> str .)
+    NOTEQ           reduce using rule 47 (expr -> str .)
+    OR              reduce using rule 47 (expr -> str .)
+    AND             reduce using rule 47 (expr -> str .)
+    ,               reduce using rule 47 (expr -> str .)
+    ]               reduce using rule 47 (expr -> str .)
+    )               reduce using rule 47 (expr -> str .)
+    :               reduce using rule 47 (expr -> str .)
+    TO              reduce using rule 47 (expr -> str .)
+
+
+state 37
+
+    (16) defvar -> VAR . type iden
+    (17) defvar -> VAR . type iden = expr
+    (51) type -> . INT
+    (52) type -> . NULL
+    (53) type -> . VECTOR
+
+    INT             shift and go to state 6
+    NULL            shift and go to state 7
+    VECTOR          shift and go to state 8
+
+    type                           shift and go to state 72
+
+state 38
+
+    (49) num -> NUMBER .
+
+    ;               reduce using rule 49 (num -> NUMBER .)
+    [               reduce using rule 49 (num -> NUMBER .)
+    ?               reduce using rule 49 (num -> NUMBER .)
+    +               reduce using rule 49 (num -> NUMBER .)
+    -               reduce using rule 49 (num -> NUMBER .)
+    *               reduce using rule 49 (num -> NUMBER .)
+    /               reduce using rule 49 (num -> NUMBER .)
+    %               reduce using rule 49 (num -> NUMBER .)
+    >               reduce using rule 49 (num -> NUMBER .)
+    <               reduce using rule 49 (num -> NUMBER .)
+    EQUALS          reduce using rule 49 (num -> NUMBER .)
+    HEQ             reduce using rule 49 (num -> NUMBER .)
+    LEQ             reduce using rule 49 (num -> NUMBER .)
+    NOTEQ           reduce using rule 49 (num -> NUMBER .)
+    OR              reduce using rule 49 (num -> NUMBER .)
+    AND             reduce using rule 49 (num -> NUMBER .)
+    ,               reduce using rule 49 (num -> NUMBER .)
+    ]               reduce using rule 49 (num -> NUMBER .)
+    )               reduce using rule 49 (num -> NUMBER .)
+    :               reduce using rule 49 (num -> NUMBER .)
+    TO              reduce using rule 49 (num -> NUMBER .)
+
+
+state 39
+
+    (50) str -> STR .
+
+    ;               reduce using rule 50 (str -> STR .)
+    [               reduce using rule 50 (str -> STR .)
+    ?               reduce using rule 50 (str -> STR .)
+    +               reduce using rule 50 (str -> STR .)
+    -               reduce using rule 50 (str -> STR .)
+    *               reduce using rule 50 (str -> STR .)
+    /               reduce using rule 50 (str -> STR .)
+    %               reduce using rule 50 (str -> STR .)
+    >               reduce using rule 50 (str -> STR .)
+    <               reduce using rule 50 (str -> STR .)
+    EQUALS          reduce using rule 50 (str -> STR .)
+    HEQ             reduce using rule 50 (str -> STR .)
+    LEQ             reduce using rule 50 (str -> STR .)
+    NOTEQ           reduce using rule 50 (str -> STR .)
+    OR              reduce using rule 50 (str -> STR .)
+    AND             reduce using rule 50 (str -> STR .)
+    ,               reduce using rule 50 (str -> STR .)
+    ]               reduce using rule 50 (str -> STR .)
+    )               reduce using rule 50 (str -> STR .)
+    :               reduce using rule 50 (str -> STR .)
+    TO              reduce using rule 50 (str -> STR .)
+
+
+state 40
+
+    (4) func -> DEF type iden ( flist ) RETURN expr . ;
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               shift and go to state 73
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 41
+
+    (44) expr -> iden = . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    expr                           shift and go to state 74
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 42
+
+    (45) expr -> iden ( . clist )
+    (21) clist -> .
+    (22) clist -> . expr
+    (23) clist -> . expr , clist
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    )               reduce using rule 21 (clist -> .)
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    clist                          shift and go to state 75
+    expr                           shift and go to state 68
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 43
+
+    (14) stmt -> { body . }
+
+    }               shift and go to state 76
+
+
+state 44
+
+    (3) func -> DEF type iden ( flist ) { body } .
+
+    DEF             reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    $end            reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    IF              reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    WHILE           reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    FOR             reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    RETURN          reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    {               reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    [               reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    !               reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    +               reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    -               reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    VAR             reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    IDEN            reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    NUMBER          reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    STR             reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    }               reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+    ELSE            reduce using rule 3 (func -> DEF type iden ( flist ) { body } .)
+
+
+state 45
+
+    (6) body -> stmt body .
+
+    }               reduce using rule 6 (body -> stmt body .)
+
+
+state 46
+
+    (7) stmt -> expr ; .
+
+    IF              reduce using rule 7 (stmt -> expr ; .)
+    WHILE           reduce using rule 7 (stmt -> expr ; .)
+    FOR             reduce using rule 7 (stmt -> expr ; .)
+    RETURN          reduce using rule 7 (stmt -> expr ; .)
+    {               reduce using rule 7 (stmt -> expr ; .)
+    [               reduce using rule 7 (stmt -> expr ; .)
+    !               reduce using rule 7 (stmt -> expr ; .)
+    +               reduce using rule 7 (stmt -> expr ; .)
+    -               reduce using rule 7 (stmt -> expr ; .)
+    VAR             reduce using rule 7 (stmt -> expr ; .)
+    DEF             reduce using rule 7 (stmt -> expr ; .)
+    IDEN            reduce using rule 7 (stmt -> expr ; .)
+    NUMBER          reduce using rule 7 (stmt -> expr ; .)
+    STR             reduce using rule 7 (stmt -> expr ; .)
+    }               reduce using rule 7 (stmt -> expr ; .)
+    ELSE            reduce using rule 7 (stmt -> expr ; .)
+
+
+state 47
+
+    (24) expr -> expr [ . expr ]
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 77
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 48
+
+    (26) expr -> expr ? . expr : expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 78
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 49
+
+    (27) expr -> expr + . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 79
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 50
+
+    (28) expr -> expr - . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 80
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 51
+
+    (29) expr -> expr * . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 81
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 52
+
+    (30) expr -> expr / . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 82
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 53
+
+    (31) expr -> expr % . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 83
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 54
+
+    (32) expr -> expr > . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 84
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 55
+
+    (33) expr -> expr < . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 85
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 56
+
+    (34) expr -> expr EQUALS . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 86
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 57
+
+    (35) expr -> expr HEQ . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 87
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 58
+
+    (36) expr -> expr LEQ . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 88
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 59
+
+    (37) expr -> expr NOTEQ . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 89
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 60
+
+    (38) expr -> expr OR . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 90
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 61
+
+    (39) expr -> expr AND . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 91
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 62
+
+    (8) stmt -> defvar ; .
+
+    IF              reduce using rule 8 (stmt -> defvar ; .)
+    WHILE           reduce using rule 8 (stmt -> defvar ; .)
+    FOR             reduce using rule 8 (stmt -> defvar ; .)
+    RETURN          reduce using rule 8 (stmt -> defvar ; .)
+    {               reduce using rule 8 (stmt -> defvar ; .)
+    [               reduce using rule 8 (stmt -> defvar ; .)
+    !               reduce using rule 8 (stmt -> defvar ; .)
+    +               reduce using rule 8 (stmt -> defvar ; .)
+    -               reduce using rule 8 (stmt -> defvar ; .)
+    VAR             reduce using rule 8 (stmt -> defvar ; .)
+    DEF             reduce using rule 8 (stmt -> defvar ; .)
+    IDEN            reduce using rule 8 (stmt -> defvar ; .)
+    NUMBER          reduce using rule 8 (stmt -> defvar ; .)
+    STR             reduce using rule 8 (stmt -> defvar ; .)
+    }               reduce using rule 8 (stmt -> defvar ; .)
+    ELSE            reduce using rule 8 (stmt -> defvar ; .)
+
+
+state 63
+
+    (9) stmt -> IF ( . expr ) stmt
+    (10) stmt -> IF ( . expr ) stmt ELSE stmt
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 92
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 64
+
+    (11) stmt -> WHILE ( . expr ) stmt
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 93
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 65
+
+    (12) stmt -> FOR ( . iden = expr TO expr ) stmt
+    (48) iden -> . IDEN
+
+    IDEN            shift and go to state 10
+
+    iden                           shift and go to state 94
+
+state 66
+
+    (13) stmt -> RETURN expr . ;
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               shift and go to state 95
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 67
+
+    (25) expr -> [ clist . ]
+
+    ]               shift and go to state 96
+
+
+state 68
+
+    (22) clist -> expr .
+    (23) clist -> expr . , clist
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ]               reduce using rule 22 (clist -> expr .)
+    )               reduce using rule 22 (clist -> expr .)
+    ,               shift and go to state 97
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 69
+
+    (41) expr -> + expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 41 (expr -> + expr .)
+    ?               reduce using rule 41 (expr -> + expr .)
+    +               reduce using rule 41 (expr -> + expr .)
+    -               reduce using rule 41 (expr -> + expr .)
+    %               reduce using rule 41 (expr -> + expr .)
+    >               reduce using rule 41 (expr -> + expr .)
+    <               reduce using rule 41 (expr -> + expr .)
+    EQUALS          reduce using rule 41 (expr -> + expr .)
+    HEQ             reduce using rule 41 (expr -> + expr .)
+    LEQ             reduce using rule 41 (expr -> + expr .)
+    NOTEQ           reduce using rule 41 (expr -> + expr .)
+    OR              reduce using rule 41 (expr -> + expr .)
+    AND             reduce using rule 41 (expr -> + expr .)
+    ,               reduce using rule 41 (expr -> + expr .)
+    ]               reduce using rule 41 (expr -> + expr .)
+    )               reduce using rule 41 (expr -> + expr .)
+    :               reduce using rule 41 (expr -> + expr .)
+    TO              reduce using rule 41 (expr -> + expr .)
+    [               shift and go to state 47
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 41 (expr -> + expr .) ]
+  ! *               [ reduce using rule 41 (expr -> + expr .) ]
+  ! /               [ reduce using rule 41 (expr -> + expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! +               [ shift and go to state 49 ]
+  ! -               [ shift and go to state 50 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 70
+
+    (42) expr -> - expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 42 (expr -> - expr .)
+    ?               reduce using rule 42 (expr -> - expr .)
+    +               reduce using rule 42 (expr -> - expr .)
+    -               reduce using rule 42 (expr -> - expr .)
+    %               reduce using rule 42 (expr -> - expr .)
+    >               reduce using rule 42 (expr -> - expr .)
+    <               reduce using rule 42 (expr -> - expr .)
+    EQUALS          reduce using rule 42 (expr -> - expr .)
+    HEQ             reduce using rule 42 (expr -> - expr .)
+    LEQ             reduce using rule 42 (expr -> - expr .)
+    NOTEQ           reduce using rule 42 (expr -> - expr .)
+    OR              reduce using rule 42 (expr -> - expr .)
+    AND             reduce using rule 42 (expr -> - expr .)
+    ,               reduce using rule 42 (expr -> - expr .)
+    ]               reduce using rule 42 (expr -> - expr .)
+    )               reduce using rule 42 (expr -> - expr .)
+    :               reduce using rule 42 (expr -> - expr .)
+    TO              reduce using rule 42 (expr -> - expr .)
+    [               shift and go to state 47
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 42 (expr -> - expr .) ]
+  ! *               [ reduce using rule 42 (expr -> - expr .) ]
+  ! /               [ reduce using rule 42 (expr -> - expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! +               [ shift and go to state 49 ]
+  ! -               [ shift and go to state 50 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 71
+
+    (40) expr -> ! expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 40 (expr -> ! expr .)
+    ?               reduce using rule 40 (expr -> ! expr .)
+    %               reduce using rule 40 (expr -> ! expr .)
+    >               reduce using rule 40 (expr -> ! expr .)
+    <               reduce using rule 40 (expr -> ! expr .)
+    EQUALS          reduce using rule 40 (expr -> ! expr .)
+    HEQ             reduce using rule 40 (expr -> ! expr .)
+    LEQ             reduce using rule 40 (expr -> ! expr .)
+    NOTEQ           reduce using rule 40 (expr -> ! expr .)
+    OR              reduce using rule 40 (expr -> ! expr .)
+    AND             reduce using rule 40 (expr -> ! expr .)
+    ,               reduce using rule 40 (expr -> ! expr .)
+    ]               reduce using rule 40 (expr -> ! expr .)
+    )               reduce using rule 40 (expr -> ! expr .)
+    :               reduce using rule 40 (expr -> ! expr .)
+    TO              reduce using rule 40 (expr -> ! expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 40 (expr -> ! expr .) ]
+  ! +               [ reduce using rule 40 (expr -> ! expr .) ]
+  ! -               [ reduce using rule 40 (expr -> ! expr .) ]
+  ! *               [ reduce using rule 40 (expr -> ! expr .) ]
+  ! /               [ reduce using rule 40 (expr -> ! expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 72
+
+    (16) defvar -> VAR type . iden
+    (17) defvar -> VAR type . iden = expr
+    (48) iden -> . IDEN
+
+    IDEN            shift and go to state 10
+
+    iden                           shift and go to state 98
+
+state 73
+
+    (4) func -> DEF type iden ( flist ) RETURN expr ; .
+
+    DEF             reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    $end            reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    IF              reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    WHILE           reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    FOR             reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    RETURN          reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    {               reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    [               reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    !               reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    +               reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    -               reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    VAR             reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    IDEN            reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    NUMBER          reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    STR             reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    }               reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+    ELSE            reduce using rule 4 (func -> DEF type iden ( flist ) RETURN expr ; .)
+
+
+state 74
+
+    (44) expr -> iden = expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 44 (expr -> iden = expr .)
+    ?               reduce using rule 44 (expr -> iden = expr .)
+    %               reduce using rule 44 (expr -> iden = expr .)
+    >               reduce using rule 44 (expr -> iden = expr .)
+    <               reduce using rule 44 (expr -> iden = expr .)
+    EQUALS          reduce using rule 44 (expr -> iden = expr .)
+    HEQ             reduce using rule 44 (expr -> iden = expr .)
+    LEQ             reduce using rule 44 (expr -> iden = expr .)
+    NOTEQ           reduce using rule 44 (expr -> iden = expr .)
+    OR              reduce using rule 44 (expr -> iden = expr .)
+    AND             reduce using rule 44 (expr -> iden = expr .)
+    ,               reduce using rule 44 (expr -> iden = expr .)
+    ]               reduce using rule 44 (expr -> iden = expr .)
+    )               reduce using rule 44 (expr -> iden = expr .)
+    :               reduce using rule 44 (expr -> iden = expr .)
+    TO              reduce using rule 44 (expr -> iden = expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 44 (expr -> iden = expr .) ]
+  ! +               [ reduce using rule 44 (expr -> iden = expr .) ]
+  ! -               [ reduce using rule 44 (expr -> iden = expr .) ]
+  ! *               [ reduce using rule 44 (expr -> iden = expr .) ]
+  ! /               [ reduce using rule 44 (expr -> iden = expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 75
+
+    (45) expr -> iden ( clist . )
+
+    )               shift and go to state 99
+
+
+state 76
+
+    (14) stmt -> { body } .
+
+    IF              reduce using rule 14 (stmt -> { body } .)
+    WHILE           reduce using rule 14 (stmt -> { body } .)
+    FOR             reduce using rule 14 (stmt -> { body } .)
+    RETURN          reduce using rule 14 (stmt -> { body } .)
+    {               reduce using rule 14 (stmt -> { body } .)
+    [               reduce using rule 14 (stmt -> { body } .)
+    !               reduce using rule 14 (stmt -> { body } .)
+    +               reduce using rule 14 (stmt -> { body } .)
+    -               reduce using rule 14 (stmt -> { body } .)
+    VAR             reduce using rule 14 (stmt -> { body } .)
+    DEF             reduce using rule 14 (stmt -> { body } .)
+    IDEN            reduce using rule 14 (stmt -> { body } .)
+    NUMBER          reduce using rule 14 (stmt -> { body } .)
+    STR             reduce using rule 14 (stmt -> { body } .)
+    }               reduce using rule 14 (stmt -> { body } .)
+    ELSE            reduce using rule 14 (stmt -> { body } .)
+
+
+state 77
+
+    (24) expr -> expr [ expr . ]
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ]               shift and go to state 100
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 78
+
+    (26) expr -> expr ? expr . : expr
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    :               shift and go to state 101
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 79
+
+    (27) expr -> expr + expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 27 (expr -> expr + expr .)
+    ?               reduce using rule 27 (expr -> expr + expr .)
+    +               reduce using rule 27 (expr -> expr + expr .)
+    -               reduce using rule 27 (expr -> expr + expr .)
+    %               reduce using rule 27 (expr -> expr + expr .)
+    >               reduce using rule 27 (expr -> expr + expr .)
+    <               reduce using rule 27 (expr -> expr + expr .)
+    EQUALS          reduce using rule 27 (expr -> expr + expr .)
+    HEQ             reduce using rule 27 (expr -> expr + expr .)
+    LEQ             reduce using rule 27 (expr -> expr + expr .)
+    NOTEQ           reduce using rule 27 (expr -> expr + expr .)
+    OR              reduce using rule 27 (expr -> expr + expr .)
+    AND             reduce using rule 27 (expr -> expr + expr .)
+    ,               reduce using rule 27 (expr -> expr + expr .)
+    ]               reduce using rule 27 (expr -> expr + expr .)
+    )               reduce using rule 27 (expr -> expr + expr .)
+    :               reduce using rule 27 (expr -> expr + expr .)
+    TO              reduce using rule 27 (expr -> expr + expr .)
+    [               shift and go to state 47
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 27 (expr -> expr + expr .) ]
+  ! *               [ reduce using rule 27 (expr -> expr + expr .) ]
+  ! /               [ reduce using rule 27 (expr -> expr + expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! +               [ shift and go to state 49 ]
+  ! -               [ shift and go to state 50 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 80
+
+    (28) expr -> expr - expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 28 (expr -> expr - expr .)
+    ?               reduce using rule 28 (expr -> expr - expr .)
+    +               reduce using rule 28 (expr -> expr - expr .)
+    -               reduce using rule 28 (expr -> expr - expr .)
+    %               reduce using rule 28 (expr -> expr - expr .)
+    >               reduce using rule 28 (expr -> expr - expr .)
+    <               reduce using rule 28 (expr -> expr - expr .)
+    EQUALS          reduce using rule 28 (expr -> expr - expr .)
+    HEQ             reduce using rule 28 (expr -> expr - expr .)
+    LEQ             reduce using rule 28 (expr -> expr - expr .)
+    NOTEQ           reduce using rule 28 (expr -> expr - expr .)
+    OR              reduce using rule 28 (expr -> expr - expr .)
+    AND             reduce using rule 28 (expr -> expr - expr .)
+    ,               reduce using rule 28 (expr -> expr - expr .)
+    ]               reduce using rule 28 (expr -> expr - expr .)
+    )               reduce using rule 28 (expr -> expr - expr .)
+    :               reduce using rule 28 (expr -> expr - expr .)
+    TO              reduce using rule 28 (expr -> expr - expr .)
+    [               shift and go to state 47
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 28 (expr -> expr - expr .) ]
+  ! *               [ reduce using rule 28 (expr -> expr - expr .) ]
+  ! /               [ reduce using rule 28 (expr -> expr - expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! +               [ shift and go to state 49 ]
+  ! -               [ shift and go to state 50 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 81
+
+    (29) expr -> expr * expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 29 (expr -> expr * expr .)
+    ?               reduce using rule 29 (expr -> expr * expr .)
+    +               reduce using rule 29 (expr -> expr * expr .)
+    -               reduce using rule 29 (expr -> expr * expr .)
+    *               reduce using rule 29 (expr -> expr * expr .)
+    /               reduce using rule 29 (expr -> expr * expr .)
+    %               reduce using rule 29 (expr -> expr * expr .)
+    >               reduce using rule 29 (expr -> expr * expr .)
+    <               reduce using rule 29 (expr -> expr * expr .)
+    EQUALS          reduce using rule 29 (expr -> expr * expr .)
+    HEQ             reduce using rule 29 (expr -> expr * expr .)
+    LEQ             reduce using rule 29 (expr -> expr * expr .)
+    NOTEQ           reduce using rule 29 (expr -> expr * expr .)
+    OR              reduce using rule 29 (expr -> expr * expr .)
+    AND             reduce using rule 29 (expr -> expr * expr .)
+    ,               reduce using rule 29 (expr -> expr * expr .)
+    ]               reduce using rule 29 (expr -> expr * expr .)
+    )               reduce using rule 29 (expr -> expr * expr .)
+    :               reduce using rule 29 (expr -> expr * expr .)
+    TO              reduce using rule 29 (expr -> expr * expr .)
+    [               shift and go to state 47
+
+  ! [               [ reduce using rule 29 (expr -> expr * expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! +               [ shift and go to state 49 ]
+  ! -               [ shift and go to state 50 ]
+  ! *               [ shift and go to state 51 ]
+  ! /               [ shift and go to state 52 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 82
+
+    (30) expr -> expr / expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 30 (expr -> expr / expr .)
+    ?               reduce using rule 30 (expr -> expr / expr .)
+    +               reduce using rule 30 (expr -> expr / expr .)
+    -               reduce using rule 30 (expr -> expr / expr .)
+    *               reduce using rule 30 (expr -> expr / expr .)
+    /               reduce using rule 30 (expr -> expr / expr .)
+    %               reduce using rule 30 (expr -> expr / expr .)
+    >               reduce using rule 30 (expr -> expr / expr .)
+    <               reduce using rule 30 (expr -> expr / expr .)
+    EQUALS          reduce using rule 30 (expr -> expr / expr .)
+    HEQ             reduce using rule 30 (expr -> expr / expr .)
+    LEQ             reduce using rule 30 (expr -> expr / expr .)
+    NOTEQ           reduce using rule 30 (expr -> expr / expr .)
+    OR              reduce using rule 30 (expr -> expr / expr .)
+    AND             reduce using rule 30 (expr -> expr / expr .)
+    ,               reduce using rule 30 (expr -> expr / expr .)
+    ]               reduce using rule 30 (expr -> expr / expr .)
+    )               reduce using rule 30 (expr -> expr / expr .)
+    :               reduce using rule 30 (expr -> expr / expr .)
+    TO              reduce using rule 30 (expr -> expr / expr .)
+    [               shift and go to state 47
+
+  ! [               [ reduce using rule 30 (expr -> expr / expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! +               [ shift and go to state 49 ]
+  ! -               [ shift and go to state 50 ]
+  ! *               [ shift and go to state 51 ]
+  ! /               [ shift and go to state 52 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 83
+
+    (31) expr -> expr % expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+  ! shift/reduce conflict for [ resolved as shift
+  ! shift/reduce conflict for ? resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for % resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for HEQ resolved as shift
+  ! shift/reduce conflict for LEQ resolved as shift
+  ! shift/reduce conflict for NOTEQ resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    ;               reduce using rule 31 (expr -> expr % expr .)
+    ,               reduce using rule 31 (expr -> expr % expr .)
+    ]               reduce using rule 31 (expr -> expr % expr .)
+    )               reduce using rule 31 (expr -> expr % expr .)
+    :               reduce using rule 31 (expr -> expr % expr .)
+    TO              reduce using rule 31 (expr -> expr % expr .)
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+  ! [               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! ?               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! +               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! -               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! *               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! /               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! %               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! >               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! <               [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! EQUALS          [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! HEQ             [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! LEQ             [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! NOTEQ           [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! OR              [ reduce using rule 31 (expr -> expr % expr .) ]
+  ! AND             [ reduce using rule 31 (expr -> expr % expr .) ]
+
+
+state 84
+
+    (32) expr -> expr > expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 32 (expr -> expr > expr .)
+    ?               reduce using rule 32 (expr -> expr > expr .)
+    %               reduce using rule 32 (expr -> expr > expr .)
+    >               reduce using rule 32 (expr -> expr > expr .)
+    <               reduce using rule 32 (expr -> expr > expr .)
+    EQUALS          reduce using rule 32 (expr -> expr > expr .)
+    HEQ             reduce using rule 32 (expr -> expr > expr .)
+    LEQ             reduce using rule 32 (expr -> expr > expr .)
+    NOTEQ           reduce using rule 32 (expr -> expr > expr .)
+    OR              reduce using rule 32 (expr -> expr > expr .)
+    AND             reduce using rule 32 (expr -> expr > expr .)
+    ,               reduce using rule 32 (expr -> expr > expr .)
+    ]               reduce using rule 32 (expr -> expr > expr .)
+    )               reduce using rule 32 (expr -> expr > expr .)
+    :               reduce using rule 32 (expr -> expr > expr .)
+    TO              reduce using rule 32 (expr -> expr > expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 32 (expr -> expr > expr .) ]
+  ! +               [ reduce using rule 32 (expr -> expr > expr .) ]
+  ! -               [ reduce using rule 32 (expr -> expr > expr .) ]
+  ! *               [ reduce using rule 32 (expr -> expr > expr .) ]
+  ! /               [ reduce using rule 32 (expr -> expr > expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 85
+
+    (33) expr -> expr < expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 33 (expr -> expr < expr .)
+    ?               reduce using rule 33 (expr -> expr < expr .)
+    %               reduce using rule 33 (expr -> expr < expr .)
+    >               reduce using rule 33 (expr -> expr < expr .)
+    <               reduce using rule 33 (expr -> expr < expr .)
+    EQUALS          reduce using rule 33 (expr -> expr < expr .)
+    HEQ             reduce using rule 33 (expr -> expr < expr .)
+    LEQ             reduce using rule 33 (expr -> expr < expr .)
+    NOTEQ           reduce using rule 33 (expr -> expr < expr .)
+    OR              reduce using rule 33 (expr -> expr < expr .)
+    AND             reduce using rule 33 (expr -> expr < expr .)
+    ,               reduce using rule 33 (expr -> expr < expr .)
+    ]               reduce using rule 33 (expr -> expr < expr .)
+    )               reduce using rule 33 (expr -> expr < expr .)
+    :               reduce using rule 33 (expr -> expr < expr .)
+    TO              reduce using rule 33 (expr -> expr < expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 33 (expr -> expr < expr .) ]
+  ! +               [ reduce using rule 33 (expr -> expr < expr .) ]
+  ! -               [ reduce using rule 33 (expr -> expr < expr .) ]
+  ! *               [ reduce using rule 33 (expr -> expr < expr .) ]
+  ! /               [ reduce using rule 33 (expr -> expr < expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 86
+
+    (34) expr -> expr EQUALS expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 34 (expr -> expr EQUALS expr .)
+    ?               reduce using rule 34 (expr -> expr EQUALS expr .)
+    %               reduce using rule 34 (expr -> expr EQUALS expr .)
+    >               reduce using rule 34 (expr -> expr EQUALS expr .)
+    <               reduce using rule 34 (expr -> expr EQUALS expr .)
+    EQUALS          reduce using rule 34 (expr -> expr EQUALS expr .)
+    HEQ             reduce using rule 34 (expr -> expr EQUALS expr .)
+    LEQ             reduce using rule 34 (expr -> expr EQUALS expr .)
+    NOTEQ           reduce using rule 34 (expr -> expr EQUALS expr .)
+    OR              reduce using rule 34 (expr -> expr EQUALS expr .)
+    AND             reduce using rule 34 (expr -> expr EQUALS expr .)
+    ,               reduce using rule 34 (expr -> expr EQUALS expr .)
+    ]               reduce using rule 34 (expr -> expr EQUALS expr .)
+    )               reduce using rule 34 (expr -> expr EQUALS expr .)
+    :               reduce using rule 34 (expr -> expr EQUALS expr .)
+    TO              reduce using rule 34 (expr -> expr EQUALS expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 34 (expr -> expr EQUALS expr .) ]
+  ! +               [ reduce using rule 34 (expr -> expr EQUALS expr .) ]
+  ! -               [ reduce using rule 34 (expr -> expr EQUALS expr .) ]
+  ! *               [ reduce using rule 34 (expr -> expr EQUALS expr .) ]
+  ! /               [ reduce using rule 34 (expr -> expr EQUALS expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 87
+
+    (35) expr -> expr HEQ expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 35 (expr -> expr HEQ expr .)
+    ?               reduce using rule 35 (expr -> expr HEQ expr .)
+    %               reduce using rule 35 (expr -> expr HEQ expr .)
+    >               reduce using rule 35 (expr -> expr HEQ expr .)
+    <               reduce using rule 35 (expr -> expr HEQ expr .)
+    EQUALS          reduce using rule 35 (expr -> expr HEQ expr .)
+    HEQ             reduce using rule 35 (expr -> expr HEQ expr .)
+    LEQ             reduce using rule 35 (expr -> expr HEQ expr .)
+    NOTEQ           reduce using rule 35 (expr -> expr HEQ expr .)
+    OR              reduce using rule 35 (expr -> expr HEQ expr .)
+    AND             reduce using rule 35 (expr -> expr HEQ expr .)
+    ,               reduce using rule 35 (expr -> expr HEQ expr .)
+    ]               reduce using rule 35 (expr -> expr HEQ expr .)
+    )               reduce using rule 35 (expr -> expr HEQ expr .)
+    :               reduce using rule 35 (expr -> expr HEQ expr .)
+    TO              reduce using rule 35 (expr -> expr HEQ expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 35 (expr -> expr HEQ expr .) ]
+  ! +               [ reduce using rule 35 (expr -> expr HEQ expr .) ]
+  ! -               [ reduce using rule 35 (expr -> expr HEQ expr .) ]
+  ! *               [ reduce using rule 35 (expr -> expr HEQ expr .) ]
+  ! /               [ reduce using rule 35 (expr -> expr HEQ expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 88
+
+    (36) expr -> expr LEQ expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 36 (expr -> expr LEQ expr .)
+    ?               reduce using rule 36 (expr -> expr LEQ expr .)
+    %               reduce using rule 36 (expr -> expr LEQ expr .)
+    >               reduce using rule 36 (expr -> expr LEQ expr .)
+    <               reduce using rule 36 (expr -> expr LEQ expr .)
+    EQUALS          reduce using rule 36 (expr -> expr LEQ expr .)
+    HEQ             reduce using rule 36 (expr -> expr LEQ expr .)
+    LEQ             reduce using rule 36 (expr -> expr LEQ expr .)
+    NOTEQ           reduce using rule 36 (expr -> expr LEQ expr .)
+    OR              reduce using rule 36 (expr -> expr LEQ expr .)
+    AND             reduce using rule 36 (expr -> expr LEQ expr .)
+    ,               reduce using rule 36 (expr -> expr LEQ expr .)
+    ]               reduce using rule 36 (expr -> expr LEQ expr .)
+    )               reduce using rule 36 (expr -> expr LEQ expr .)
+    :               reduce using rule 36 (expr -> expr LEQ expr .)
+    TO              reduce using rule 36 (expr -> expr LEQ expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 36 (expr -> expr LEQ expr .) ]
+  ! +               [ reduce using rule 36 (expr -> expr LEQ expr .) ]
+  ! -               [ reduce using rule 36 (expr -> expr LEQ expr .) ]
+  ! *               [ reduce using rule 36 (expr -> expr LEQ expr .) ]
+  ! /               [ reduce using rule 36 (expr -> expr LEQ expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 89
+
+    (37) expr -> expr NOTEQ expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    ?               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    %               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    >               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    <               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    EQUALS          reduce using rule 37 (expr -> expr NOTEQ expr .)
+    HEQ             reduce using rule 37 (expr -> expr NOTEQ expr .)
+    LEQ             reduce using rule 37 (expr -> expr NOTEQ expr .)
+    NOTEQ           reduce using rule 37 (expr -> expr NOTEQ expr .)
+    OR              reduce using rule 37 (expr -> expr NOTEQ expr .)
+    AND             reduce using rule 37 (expr -> expr NOTEQ expr .)
+    ,               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    ]               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    )               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    :               reduce using rule 37 (expr -> expr NOTEQ expr .)
+    TO              reduce using rule 37 (expr -> expr NOTEQ expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 37 (expr -> expr NOTEQ expr .) ]
+  ! +               [ reduce using rule 37 (expr -> expr NOTEQ expr .) ]
+  ! -               [ reduce using rule 37 (expr -> expr NOTEQ expr .) ]
+  ! *               [ reduce using rule 37 (expr -> expr NOTEQ expr .) ]
+  ! /               [ reduce using rule 37 (expr -> expr NOTEQ expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 90
+
+    (38) expr -> expr OR expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 38 (expr -> expr OR expr .)
+    ?               reduce using rule 38 (expr -> expr OR expr .)
+    %               reduce using rule 38 (expr -> expr OR expr .)
+    >               reduce using rule 38 (expr -> expr OR expr .)
+    <               reduce using rule 38 (expr -> expr OR expr .)
+    EQUALS          reduce using rule 38 (expr -> expr OR expr .)
+    HEQ             reduce using rule 38 (expr -> expr OR expr .)
+    LEQ             reduce using rule 38 (expr -> expr OR expr .)
+    NOTEQ           reduce using rule 38 (expr -> expr OR expr .)
+    OR              reduce using rule 38 (expr -> expr OR expr .)
+    AND             reduce using rule 38 (expr -> expr OR expr .)
+    ,               reduce using rule 38 (expr -> expr OR expr .)
+    ]               reduce using rule 38 (expr -> expr OR expr .)
+    )               reduce using rule 38 (expr -> expr OR expr .)
+    :               reduce using rule 38 (expr -> expr OR expr .)
+    TO              reduce using rule 38 (expr -> expr OR expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 38 (expr -> expr OR expr .) ]
+  ! +               [ reduce using rule 38 (expr -> expr OR expr .) ]
+  ! -               [ reduce using rule 38 (expr -> expr OR expr .) ]
+  ! *               [ reduce using rule 38 (expr -> expr OR expr .) ]
+  ! /               [ reduce using rule 38 (expr -> expr OR expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 91
+
+    (39) expr -> expr AND expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 39 (expr -> expr AND expr .)
+    ?               reduce using rule 39 (expr -> expr AND expr .)
+    %               reduce using rule 39 (expr -> expr AND expr .)
+    >               reduce using rule 39 (expr -> expr AND expr .)
+    <               reduce using rule 39 (expr -> expr AND expr .)
+    EQUALS          reduce using rule 39 (expr -> expr AND expr .)
+    HEQ             reduce using rule 39 (expr -> expr AND expr .)
+    LEQ             reduce using rule 39 (expr -> expr AND expr .)
+    NOTEQ           reduce using rule 39 (expr -> expr AND expr .)
+    OR              reduce using rule 39 (expr -> expr AND expr .)
+    AND             reduce using rule 39 (expr -> expr AND expr .)
+    ,               reduce using rule 39 (expr -> expr AND expr .)
+    ]               reduce using rule 39 (expr -> expr AND expr .)
+    )               reduce using rule 39 (expr -> expr AND expr .)
+    :               reduce using rule 39 (expr -> expr AND expr .)
+    TO              reduce using rule 39 (expr -> expr AND expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 39 (expr -> expr AND expr .) ]
+  ! +               [ reduce using rule 39 (expr -> expr AND expr .) ]
+  ! -               [ reduce using rule 39 (expr -> expr AND expr .) ]
+  ! *               [ reduce using rule 39 (expr -> expr AND expr .) ]
+  ! /               [ reduce using rule 39 (expr -> expr AND expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 92
+
+    (9) stmt -> IF ( expr . ) stmt
+    (10) stmt -> IF ( expr . ) stmt ELSE stmt
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    )               shift and go to state 102
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 93
+
+    (11) stmt -> WHILE ( expr . ) stmt
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    )               shift and go to state 103
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 94
+
+    (12) stmt -> FOR ( iden . = expr TO expr ) stmt
+
+    =               shift and go to state 104
+
+
+state 95
+
+    (13) stmt -> RETURN expr ; .
+
+    IF              reduce using rule 13 (stmt -> RETURN expr ; .)
+    WHILE           reduce using rule 13 (stmt -> RETURN expr ; .)
+    FOR             reduce using rule 13 (stmt -> RETURN expr ; .)
+    RETURN          reduce using rule 13 (stmt -> RETURN expr ; .)
+    {               reduce using rule 13 (stmt -> RETURN expr ; .)
+    [               reduce using rule 13 (stmt -> RETURN expr ; .)
+    !               reduce using rule 13 (stmt -> RETURN expr ; .)
+    +               reduce using rule 13 (stmt -> RETURN expr ; .)
+    -               reduce using rule 13 (stmt -> RETURN expr ; .)
+    VAR             reduce using rule 13 (stmt -> RETURN expr ; .)
+    DEF             reduce using rule 13 (stmt -> RETURN expr ; .)
+    IDEN            reduce using rule 13 (stmt -> RETURN expr ; .)
+    NUMBER          reduce using rule 13 (stmt -> RETURN expr ; .)
+    STR             reduce using rule 13 (stmt -> RETURN expr ; .)
+    }               reduce using rule 13 (stmt -> RETURN expr ; .)
+    ELSE            reduce using rule 13 (stmt -> RETURN expr ; .)
+
+
+state 96
+
+    (25) expr -> [ clist ] .
+
+    ;               reduce using rule 25 (expr -> [ clist ] .)
+    [               reduce using rule 25 (expr -> [ clist ] .)
+    ?               reduce using rule 25 (expr -> [ clist ] .)
+    +               reduce using rule 25 (expr -> [ clist ] .)
+    -               reduce using rule 25 (expr -> [ clist ] .)
+    *               reduce using rule 25 (expr -> [ clist ] .)
+    /               reduce using rule 25 (expr -> [ clist ] .)
+    %               reduce using rule 25 (expr -> [ clist ] .)
+    >               reduce using rule 25 (expr -> [ clist ] .)
+    <               reduce using rule 25 (expr -> [ clist ] .)
+    EQUALS          reduce using rule 25 (expr -> [ clist ] .)
+    HEQ             reduce using rule 25 (expr -> [ clist ] .)
+    LEQ             reduce using rule 25 (expr -> [ clist ] .)
+    NOTEQ           reduce using rule 25 (expr -> [ clist ] .)
+    OR              reduce using rule 25 (expr -> [ clist ] .)
+    AND             reduce using rule 25 (expr -> [ clist ] .)
+    ,               reduce using rule 25 (expr -> [ clist ] .)
+    ]               reduce using rule 25 (expr -> [ clist ] .)
+    )               reduce using rule 25 (expr -> [ clist ] .)
+    :               reduce using rule 25 (expr -> [ clist ] .)
+    TO              reduce using rule 25 (expr -> [ clist ] .)
+
+
+state 97
+
+    (23) clist -> expr , . clist
+    (21) clist -> .
+    (22) clist -> . expr
+    (23) clist -> . expr , clist
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    ]               reduce using rule 21 (clist -> .)
+    )               reduce using rule 21 (clist -> .)
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 68
+    clist                          shift and go to state 105
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 98
+
+    (16) defvar -> VAR type iden .
+    (17) defvar -> VAR type iden . = expr
+
+    ;               reduce using rule 16 (defvar -> VAR type iden .)
+    =               shift and go to state 106
+
+
+state 99
+
+    (45) expr -> iden ( clist ) .
+
+    ;               reduce using rule 45 (expr -> iden ( clist ) .)
+    [               reduce using rule 45 (expr -> iden ( clist ) .)
+    ?               reduce using rule 45 (expr -> iden ( clist ) .)
+    +               reduce using rule 45 (expr -> iden ( clist ) .)
+    -               reduce using rule 45 (expr -> iden ( clist ) .)
+    *               reduce using rule 45 (expr -> iden ( clist ) .)
+    /               reduce using rule 45 (expr -> iden ( clist ) .)
+    %               reduce using rule 45 (expr -> iden ( clist ) .)
+    >               reduce using rule 45 (expr -> iden ( clist ) .)
+    <               reduce using rule 45 (expr -> iden ( clist ) .)
+    EQUALS          reduce using rule 45 (expr -> iden ( clist ) .)
+    HEQ             reduce using rule 45 (expr -> iden ( clist ) .)
+    LEQ             reduce using rule 45 (expr -> iden ( clist ) .)
+    NOTEQ           reduce using rule 45 (expr -> iden ( clist ) .)
+    OR              reduce using rule 45 (expr -> iden ( clist ) .)
+    AND             reduce using rule 45 (expr -> iden ( clist ) .)
+    ,               reduce using rule 45 (expr -> iden ( clist ) .)
+    ]               reduce using rule 45 (expr -> iden ( clist ) .)
+    )               reduce using rule 45 (expr -> iden ( clist ) .)
+    :               reduce using rule 45 (expr -> iden ( clist ) .)
+    TO              reduce using rule 45 (expr -> iden ( clist ) .)
+
+
+state 100
+
+    (24) expr -> expr [ expr ] .
+
+    ;               reduce using rule 24 (expr -> expr [ expr ] .)
+    [               reduce using rule 24 (expr -> expr [ expr ] .)
+    ?               reduce using rule 24 (expr -> expr [ expr ] .)
+    +               reduce using rule 24 (expr -> expr [ expr ] .)
+    -               reduce using rule 24 (expr -> expr [ expr ] .)
+    *               reduce using rule 24 (expr -> expr [ expr ] .)
+    /               reduce using rule 24 (expr -> expr [ expr ] .)
+    %               reduce using rule 24 (expr -> expr [ expr ] .)
+    >               reduce using rule 24 (expr -> expr [ expr ] .)
+    <               reduce using rule 24 (expr -> expr [ expr ] .)
+    EQUALS          reduce using rule 24 (expr -> expr [ expr ] .)
+    HEQ             reduce using rule 24 (expr -> expr [ expr ] .)
+    LEQ             reduce using rule 24 (expr -> expr [ expr ] .)
+    NOTEQ           reduce using rule 24 (expr -> expr [ expr ] .)
+    OR              reduce using rule 24 (expr -> expr [ expr ] .)
+    AND             reduce using rule 24 (expr -> expr [ expr ] .)
+    ,               reduce using rule 24 (expr -> expr [ expr ] .)
+    ]               reduce using rule 24 (expr -> expr [ expr ] .)
+    )               reduce using rule 24 (expr -> expr [ expr ] .)
+    :               reduce using rule 24 (expr -> expr [ expr ] .)
+    TO              reduce using rule 24 (expr -> expr [ expr ] .)
+
+
+state 101
+
+    (26) expr -> expr ? expr : . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 107
+    iden                           shift and go to state 20
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 102
+
+    (9) stmt -> IF ( expr ) . stmt
+    (10) stmt -> IF ( expr ) . stmt ELSE stmt
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 24
+    stmt                           shift and go to state 108
+    defvar                         shift and go to state 25
+    iden                           shift and go to state 20
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 103
+
+    (11) stmt -> WHILE ( expr ) . stmt
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 24
+    stmt                           shift and go to state 109
+    defvar                         shift and go to state 25
+    iden                           shift and go to state 20
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 104
+
+    (12) stmt -> FOR ( iden = . expr TO expr ) stmt
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    expr                           shift and go to state 110
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 105
+
+    (23) clist -> expr , clist .
+
+    ]               reduce using rule 23 (clist -> expr , clist .)
+    )               reduce using rule 23 (clist -> expr , clist .)
+
+
+state 106
+
+    (17) defvar -> VAR type iden = . expr
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    expr                           shift and go to state 111
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 107
+
+    (26) expr -> expr ? expr : expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 26 (expr -> expr ? expr : expr .)
+    ?               reduce using rule 26 (expr -> expr ? expr : expr .)
+    %               reduce using rule 26 (expr -> expr ? expr : expr .)
+    >               reduce using rule 26 (expr -> expr ? expr : expr .)
+    <               reduce using rule 26 (expr -> expr ? expr : expr .)
+    EQUALS          reduce using rule 26 (expr -> expr ? expr : expr .)
+    HEQ             reduce using rule 26 (expr -> expr ? expr : expr .)
+    LEQ             reduce using rule 26 (expr -> expr ? expr : expr .)
+    NOTEQ           reduce using rule 26 (expr -> expr ? expr : expr .)
+    OR              reduce using rule 26 (expr -> expr ? expr : expr .)
+    AND             reduce using rule 26 (expr -> expr ? expr : expr .)
+    ,               reduce using rule 26 (expr -> expr ? expr : expr .)
+    ]               reduce using rule 26 (expr -> expr ? expr : expr .)
+    )               reduce using rule 26 (expr -> expr ? expr : expr .)
+    :               reduce using rule 26 (expr -> expr ? expr : expr .)
+    TO              reduce using rule 26 (expr -> expr ? expr : expr .)
+    [               shift and go to state 47
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+
+  ! [               [ reduce using rule 26 (expr -> expr ? expr : expr .) ]
+  ! +               [ reduce using rule 26 (expr -> expr ? expr : expr .) ]
+  ! -               [ reduce using rule 26 (expr -> expr ? expr : expr .) ]
+  ! *               [ reduce using rule 26 (expr -> expr ? expr : expr .) ]
+  ! /               [ reduce using rule 26 (expr -> expr ? expr : expr .) ]
+  ! ?               [ shift and go to state 48 ]
+  ! %               [ shift and go to state 53 ]
+  ! >               [ shift and go to state 54 ]
+  ! <               [ shift and go to state 55 ]
+  ! EQUALS          [ shift and go to state 56 ]
+  ! HEQ             [ shift and go to state 57 ]
+  ! LEQ             [ shift and go to state 58 ]
+  ! NOTEQ           [ shift and go to state 59 ]
+  ! OR              [ shift and go to state 60 ]
+  ! AND             [ shift and go to state 61 ]
+
+
+state 108
+
+    (9) stmt -> IF ( expr ) stmt .
+    (10) stmt -> IF ( expr ) stmt . ELSE stmt
+
+    IF              reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    WHILE           reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    FOR             reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    RETURN          reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    {               reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    [               reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    !               reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    +               reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    -               reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    VAR             reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    DEF             reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    IDEN            reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    NUMBER          reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    STR             reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    }               reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+    ELSE            reduce using rule 9 (stmt -> IF ( expr ) stmt .)
+
+  ! ELSE            [ shift and go to state 112 ]
+
+
+state 109
+
+    (11) stmt -> WHILE ( expr ) stmt .
+
+    IF              reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    WHILE           reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    FOR             reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    RETURN          reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    {               reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    [               reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    !               reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    +               reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    -               reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    VAR             reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    DEF             reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    IDEN            reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    NUMBER          reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    STR             reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    }               reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+    ELSE            reduce using rule 11 (stmt -> WHILE ( expr ) stmt .)
+
+
+state 110
+
+    (12) stmt -> FOR ( iden = expr . TO expr ) stmt
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    TO              shift and go to state 113
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 111
+
+    (17) defvar -> VAR type iden = expr .
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    ;               reduce using rule 17 (defvar -> VAR type iden = expr .)
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 112
+
+    (10) stmt -> IF ( expr ) stmt ELSE . stmt
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    expr                           shift and go to state 24
+    stmt                           shift and go to state 114
+    defvar                         shift and go to state 25
+    iden                           shift and go to state 20
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 113
+
+    (12) stmt -> FOR ( iden = expr TO . expr ) stmt
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    expr                           shift and go to state 115
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 114
+
+    (10) stmt -> IF ( expr ) stmt ELSE stmt .
+
+    IF              reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    WHILE           reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    FOR             reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    RETURN          reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    {               reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    [               reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    !               reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    +               reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    -               reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    VAR             reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    DEF             reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    IDEN            reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    NUMBER          reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    STR             reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    }               reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+    ELSE            reduce using rule 10 (stmt -> IF ( expr ) stmt ELSE stmt .)
+
+
+state 115
+
+    (12) stmt -> FOR ( iden = expr TO expr . ) stmt
+    (24) expr -> expr . [ expr ]
+    (26) expr -> expr . ? expr : expr
+    (27) expr -> expr . + expr
+    (28) expr -> expr . - expr
+    (29) expr -> expr . * expr
+    (30) expr -> expr . / expr
+    (31) expr -> expr . % expr
+    (32) expr -> expr . > expr
+    (33) expr -> expr . < expr
+    (34) expr -> expr . EQUALS expr
+    (35) expr -> expr . HEQ expr
+    (36) expr -> expr . LEQ expr
+    (37) expr -> expr . NOTEQ expr
+    (38) expr -> expr . OR expr
+    (39) expr -> expr . AND expr
+
+    )               shift and go to state 116
+    [               shift and go to state 47
+    ?               shift and go to state 48
+    +               shift and go to state 49
+    -               shift and go to state 50
+    *               shift and go to state 51
+    /               shift and go to state 52
+    %               shift and go to state 53
+    >               shift and go to state 54
+    <               shift and go to state 55
+    EQUALS          shift and go to state 56
+    HEQ             shift and go to state 57
+    LEQ             shift and go to state 58
+    NOTEQ           shift and go to state 59
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+
+state 116
+
+    (12) stmt -> FOR ( iden = expr TO expr ) . stmt
+    (7) stmt -> . expr ;
+    (8) stmt -> . defvar ;
+    (9) stmt -> . IF ( expr ) stmt
+    (10) stmt -> . IF ( expr ) stmt ELSE stmt
+    (11) stmt -> . WHILE ( expr ) stmt
+    (12) stmt -> . FOR ( iden = expr TO expr ) stmt
+    (13) stmt -> . RETURN expr ;
+    (14) stmt -> . { body }
+    (15) stmt -> . func
+    (24) expr -> . expr [ expr ]
+    (25) expr -> . [ clist ]
+    (26) expr -> . expr ? expr : expr
+    (27) expr -> . expr + expr
+    (28) expr -> . expr - expr
+    (29) expr -> . expr * expr
+    (30) expr -> . expr / expr
+    (31) expr -> . expr % expr
+    (32) expr -> . expr > expr
+    (33) expr -> . expr < expr
+    (34) expr -> . expr EQUALS expr
+    (35) expr -> . expr HEQ expr
+    (36) expr -> . expr LEQ expr
+    (37) expr -> . expr NOTEQ expr
+    (38) expr -> . expr OR expr
+    (39) expr -> . expr AND expr
+    (40) expr -> . ! expr
+    (41) expr -> . + expr
+    (42) expr -> . - expr
+    (43) expr -> . iden
+    (44) expr -> . iden = expr
+    (45) expr -> . iden ( clist )
+    (46) expr -> . num
+    (47) expr -> . str
+    (16) defvar -> . VAR type iden
+    (17) defvar -> . VAR type iden = expr
+    (3) func -> . DEF type iden ( flist ) { body }
+    (4) func -> . DEF type iden ( flist ) RETURN expr ;
+    (48) iden -> . IDEN
+    (49) num -> . NUMBER
+    (50) str -> . STR
+
+    IF              shift and go to state 26
+    WHILE           shift and go to state 27
+    FOR             shift and go to state 28
+    RETURN          shift and go to state 29
+    {               shift and go to state 21
+    [               shift and go to state 31
+    !               shift and go to state 34
+    +               shift and go to state 32
+    -               shift and go to state 33
+    VAR             shift and go to state 37
+    DEF             shift and go to state 3
+    IDEN            shift and go to state 10
+    NUMBER          shift and go to state 38
+    STR             shift and go to state 39
+
+    iden                           shift and go to state 20
+    expr                           shift and go to state 24
+    stmt                           shift and go to state 117
+    defvar                         shift and go to state 25
+    func                           shift and go to state 30
+    num                            shift and go to state 35
+    str                            shift and go to state 36
+
+state 117
+
+    (12) stmt -> FOR ( iden = expr TO expr ) stmt .
+
+    IF              reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    WHILE           reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    FOR             reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    RETURN          reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    {               reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    [               reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    !               reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    +               reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    -               reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    VAR             reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    DEF             reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    IDEN            reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    NUMBER          reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    STR             reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    }               reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+    ELSE            reduce using rule 12 (stmt -> FOR ( iden = expr TO expr ) stmt .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for [ in state 83 resolved as shift
+WARNING: shift/reduce conflict for ? in state 83 resolved as shift
+WARNING: shift/reduce conflict for + in state 83 resolved as shift
+WARNING: shift/reduce conflict for - in state 83 resolved as shift
+WARNING: shift/reduce conflict for * in state 83 resolved as shift
+WARNING: shift/reduce conflict for / in state 83 resolved as shift
+WARNING: shift/reduce conflict for % in state 83 resolved as shift
+WARNING: shift/reduce conflict for > in state 83 resolved as shift
+WARNING: shift/reduce conflict for < in state 83 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 83 resolved as shift
+WARNING: shift/reduce conflict for HEQ in state 83 resolved as shift
+WARNING: shift/reduce conflict for LEQ in state 83 resolved as shift
+WARNING: shift/reduce conflict for NOTEQ in state 83 resolved as shift
+WARNING: shift/reduce conflict for OR in state 83 resolved as shift
+WARNING: shift/reduce conflict for AND in state 83 resolved as shift
